@@ -30,3 +30,25 @@ Analysis: pretraining is very important (thorough ablation analysis).
 
 Overall, good paper: idea, engineering implemetation, experiment setup, analysis of results. I should also remember the datasets they used to make my own experiments as well. 
 
+
+## Language Models Are Few-Shot Learners
+I have hear about term "zero shot" before, but didn't really realize what it means. Once I've familarized myself with the details I was quite impressed with the idea (and that it works). However it does have it's shortcomings, it's interesting to read about them as well:
+* https://lacker.io/ai/2020/07/06/giving-gpt-3-a-turing-test.html (very interesting and thorough examination of GPT-3 abilities)
+* https://www.technologyreview.com/2020/08/22/1007539/gpt3-openai-language-generator-artificial-intelligence-ai-opinion another examination
+
+My first impression was that is just a huge autoregressive model. The fact that it generates good samples is very impressive, but as authors admit, it does have limitations. Is there any interesting difference compared to GPT-2 model? Can this model be useful?
+
+
+Their model does better on Machine Translation (unsupervised, since it was trained just on LM), than sota atchitectures, that's pretty crazy. "For both Fr-En and De-En,
+few shot GPT-3 outperforms the best supervised result we could find but due to our unfamiliarity with the literature and
+the appearance that these are un-competitive benchmarks we do not suspect those results represent true state of the art."
+
+""We focused on exploring in-context learning behavior in autoregressive language models because it is straightforward to both
+sample and compute likelihoods with this model class. As a result our experiments do not include any bidirectional
+architectures or other training objectives such as denoising"
+
+New research directions in NLP unsupervised learning:
+"For all these reasons, scaling pure self-supervised prediction is likely to hit limits, and augmentation with a
+different approach is likely to be necessary. Promising future directions in this vein might include learning the objective
+function from humans [ZSW+19a], fine-tuning with reinforcement learning, or adding additional modalities such as
+images to provide grounding and a better model of the world [CLY+19]."
