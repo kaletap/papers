@@ -52,3 +52,7 @@ New research directions in NLP unsupervised learning:
 different approach is likely to be necessary. Promising future directions in this vein might include learning the objective
 function from humans [ZSW+19a], fine-tuning with reinforcement learning, or adding additional modalities such as
 images to provide grounding and a better model of the world [CLY+19]."
+
+## How to do data augmentaton in NLP?
+https://amitness.com/2020/05/data-augmentation-for-nlp/
+
