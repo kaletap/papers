@@ -53,6 +53,17 @@ different approach is likely to be necessary. Promising future directions in thi
 function from humans [ZSW+19a], fine-tuning with reinforcement learning, or adding additional modalities such as
 images to provide grounding and a better model of the world [CLY+19]."
 
-## How to do data augmentaton in NLP?
-https://amitness.com/2020/05/data-augmentation-for-nlp/
+## BART
+In short: pretraining language models by msking spans of text and learning to predict them by using sequence to sequence (encoder-decode) model. It's good, because it allows for many input transformations, including changing the length of the input sentence. This approach (like Bert) can be seen as training denoising auto-encoder.
+
+Transformations:
+* token masking
+* token deletion
+* text infilling (masking spans of multiple words)
+* sentence permutation
+* document rotation
+
+It can also be used for Machine Translation (with decoder producing English text). This is done be adding endoder layers from source language (like Romanian).
+
+Overall, seems like and obvious thing to do and it's good that someone did it. Makes me wonder how many such things are obvious to do, but nobody did it yet (or not well enough). I guess that's why T5 was introduced concurrently by Google.
 
