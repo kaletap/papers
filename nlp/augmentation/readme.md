@@ -1,5 +1,9 @@
 # Augmentation in NLP tasks.
 
+How to do text augmentation?
+
+https://amitness.com/2020/05/data-augmentation-for-nlp/
+
 ## EDA: Easy Data Augmentation Techniques for Boosting Performance on Text Classification Tasks
 https://arxiv.org/abs/1901.11196
 
@@ -96,3 +100,9 @@ Bart is also a compromise between label preservation (which Bert does the best) 
 ### Summary
 (Conditionally) pretrained transformers can be useful for data augmentation when we do not have a lot of data. Methods can be combined with 'other advanced in text content manipulation such as co-training the data generator and classifier': Hu et al. 2019.
 
+## Conditional Bert Contextual Augmentation
+https://arxiv.org/abs/1812.06705
+
+Bert fine-tuned on task data with label infromation to improve word substitution augmentaiton. It works better than just Bert, since label infromation is taken into account. It outperforms other methods on all 6 datasets. However, only LSTMs and CNNs are evaluated. This is suprising, since authors describe the effectiveness of Bert for downstream tasks. Bert would most likely diminish the performance of their method (especially since they didn't decrease dataset size for their experiments).
+
+References Kobayashi, 2018, who did similar thing but with LSTMs (https://www.aclweb.org/anthology/N18-2072/)
