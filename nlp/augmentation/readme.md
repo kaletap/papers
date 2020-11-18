@@ -106,3 +106,61 @@ https://arxiv.org/abs/1812.06705
 Bert fine-tuned on task data with label infromation to improve word substitution augmentaiton. It works better than just Bert, since label infromation is taken into account. It outperforms other methods on all 6 datasets. However, only LSTMs and CNNs are evaluated. This is suprising, since authors describe the effectiveness of Bert for downstream tasks. Bert would most likely diminish the performance of their method (especially since they didn't decrease dataset size for their experiments).
 
 References Kobayashi, 2018, who did similar thing but with LSTMs (https://www.aclweb.org/anthology/N18-2072/)
+
+## Not Enough Data? Deep Learning to the Rescue!
+### Text augmentation with GPT-2
+https://arxiv.org/abs/1911.03118
+
+They call their solution 'LAMBADA'. It's basically fine-tuning GPT on small data. They say it's better than other sota methods (which includes C-Bert, which they cite). Is it possible to fine-tune GPT just on 100 examples? What about 10? They say that this approach is 'counter-intuitive'. Maybe it is, since we are using language model for both sentence generation and classification.
+
+They cite Kingma and Welling as well! Are they going to use VAEs?
+
+Basically, there are 4 steps:
+1. train a baseline classifier
+2. fine-tune language model
+3. generate new labeled sentences from scratch
+4. filter out shitty ones (using classifier trained with 1.)
+
+Sounds simple, I wonder how important this filtering is. Especially since the classifier can be quite bad if there is not enough samples. They use [y, SEP, x, EOS] format for their data. I wonder how important this <sep> is, since this approach didn't work too well in my experiments (label was hardly ever preserved). Authors report that it generates samples quite well. Is it maybe because GPT was trained on the same datasets they use for experiments? Could be the case I guess, would be interesting to test it on some private ones.
+
+They generate 10x the number of the sentences and retain top sentences according to confidence of a classifier. 
+
+They test their model on three classifiers: Bert, LSTM and SVM (why SVM for god's sake)? They compare their augmentation methods with EDA, CBert and CVAE (wait, what is CVAE?) on 3 datasets: ATIS, TREC and WVA. It seems that TREC is used a lot in data augmentation experiments or as a classification benchmark in general. Their task is to classify sentence, not an entire document! This can make things easier (and faster) to train.
+
+Models:
+* SVM
+* LSTM
+* Bert
+
+Datasets:
+* ATIS
+* TREC
+* WVA
+
+Augmenters:
+* EDA
+* C-Bert
+* C-VAE
+
+They use datasets of sizes 5, 10, 20, 50 or 100 samples per class for training (these samples are the same for every experiment of course). It doesn't seem like a lot. Also, the differences in sizes look quite small.
+
+They compare themselves to CVAE (Kingma and Welling, 2014). How did they train it? WIth standard RNN-based encoder and decoder, which kind of sucks. Was there any attemtp to leverage transformers for building VAE? Not to my knowldege, but maybe. I don't know yet how that would be done exactly for the decoder part, I guess one would have to get rid of decoder-encoder attenton and focus on only a single representation of encoder (how to construct it?).
+
+Overall, I think that it incredibly sucks, that authors do not show almost any examples from their augmenters. I have no idea how good they are. I am pretty sure that CVAE based on RNNs is terrible (especially that it's based on idea from 2014).
+
+Results: LAMBADA outperfrom all other methods (including CBERT).
+
+Question: a lot of authors use fine-tuned transformer for augmentation, but not for classification. Is an improvement still visible when using fine-tuned language model?
+
+They also mention theoretical possibility of generating samples for unseen classes (zero-shot learning, Socher et al. 2013 - seems that Socher published a lot of influential work). Doesn't seem likely that it is going to work, but interesting idea. But I know now why they use [SEP] token after class label. Class label is just a word of a class, not a special token. Thus it makes sense to use special token to determine, that we now generate new sentence.
+
+They mention **self-supervised** described in Ruder and Plank 2018. Haven't heard of that. It seems that what we can do, is to simply label examples that are unlabeled with classifier that we already have. It is possibly that this would bootstrap the performance and it indeed does. But still LAMBADA is better than taking samples from a classifier. It would be kind of weird if a classifier with accuracy p had better accuracy after training on examples labeled by itself also with accuracy p. I need some more theory on this semi-supervised learning.
+
+Lastly, they warn against data drifting, when data is dominated by generated, not true, samples. 
+
+Overall, interesting approach, proabably worth examining. What's lacking is a list of examples of generated sentences chosen for each augmenter and each dataset. What sort of samples are accepted and rejected by classifier? 
+
+Also, it's a shame that they do not test classifier fine-tuned on language modeling task as well (they use fine-tuning only for augmetnation language modeling).
+
+General idea: maybe it would be worth it, to incorporate smaller weights in a loss for samples synthetically generated?
+
