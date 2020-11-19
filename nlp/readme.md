@@ -72,3 +72,5 @@ https://iclr.cc/virtual_2020/poster_rkgNKkHtvB.html
 
 Likte the title says, it's a more efficient transformer, which achieves same results. It uses O(L logL) computations (runs faster) and takes less memory. Details are not that important (although very interesting), but I think that the main takeaway is just to use it instead of Bert/Roberta, especially for expeiriments involving fine-tuning a language model multiple times on long sequences.
 
+There is also a Longformer (with similar goal in mind) that was developed around the same time (https://www.topbots.com/nlp-research-papers-2020/?utm_source=ActiveCampaign&utm_medium=email&utm_content=Beyond+GPT-3%3A+NLP+research+breakthroughs&utm_campaign=Weekly+Newsletter+11+18+2020+Issue+213&vgo_ee=OagFA9vgDZd6gDyXiV6iVr35hO7C%2FF3J%2FgQB9Uu3XAY%3D).
+
