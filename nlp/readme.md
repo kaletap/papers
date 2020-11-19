@@ -67,3 +67,8 @@ It can also be used for Machine Translation (with decoder producing English text
 
 Overall, seems like and obvious thing to do and it's good that someone did it. Makes me wonder how many such things are obvious to do, but nobody did it yet (or not well enough). I guess that's why T5 was introduced concurrently by Google.
 
+## Reformer: The Efficient Transformer
+https://iclr.cc/virtual_2020/poster_rkgNKkHtvB.html
+
+Likte the title says, it's a more efficient transformer, which achieves same results. It uses O(L logL) computations (runs faster) and takes less memory. Details are not that important (although very interesting), but I think that the main takeaway is just to use it instead of Bert/Roberta, especially for expeiriments involving fine-tuning a language model multiple times on long sequences.
+
