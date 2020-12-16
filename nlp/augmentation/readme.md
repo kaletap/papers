@@ -164,3 +164,7 @@ Also, it's a shame that they do not test classifier fine-tuned on language model
 
 General idea: maybe it would be worth it, to incorporate smaller weights in a loss for samples synthetically generated?
 
+## Toward Controlled Generation of Text
+https://arxiv.org/abs/1703.00955
+
+We want to generate text whose attributes can be controlled by learning disentangled latent representations
